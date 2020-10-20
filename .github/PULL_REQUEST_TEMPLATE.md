@@ -1,6 +1,6 @@
 <!--
   Make sure to have done the following:
-  [] Check the CONTRIBUTE.md and followed the standards
+  [] Check the CONTRIBUTING.md and followed the standards
   [] Add unit-tests
 -->
 
