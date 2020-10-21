@@ -1,0 +1,40 @@
+---
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: kafe-front-end
+    spec:
+      replicas: 1
+      selector:
+        matchLabels:
+          app: kafe-front-end
+      template:
+        metadata:
+          labels:
+            app: kafe-front-end
+        spec:
+          nodeSelector:
+            "beta.kubernetes.io/os": linux
+          containers:
+          - name: kafe-front-end
+            image: ghcr.io/kafekhalife/kafekhalife
+            resources:
+              requests:
+                cpu: 100m
+                memory: 128Mi
+              limits:
+                cpu: 250m
+                memory: 256Mi
+            ports:
+            - containerPort: 80
+    ---
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: kafe-front-end
+    spec:
+      type: LoadBalancer
+      ports:
+      - port: 80
+      selector:
+        app: kafe-front-end
