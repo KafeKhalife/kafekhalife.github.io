@@ -30,6 +30,6 @@ jobs:
         az webapp list --query "[?state=='Running']"
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: 'superkrustykrab'
-        publish-profile: ${{ secrets.KAFE_CONTAINER_AZURE_WEBAPP_PUBLISH_PROFILE }}
+        app-name: 'kafekhalife'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: 'ghcr.io/kafekhalife/kafekhalife:latest'
