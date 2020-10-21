@@ -25,6 +25,7 @@ jobs:
     
     - name: Docker Build & Push to GitHub Packages
       run: |
+        echo IMAGE=$IMG_URL:$IMG_VERSION
         docker build . -t $IMG_URL:$IMG_VERSION
         docker push $IMG_URL:$IMG_VERSION
 
