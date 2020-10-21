@@ -1,0 +1,31 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Azure Container Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ] 
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ghcr.io
+        username: skhalife
+        password: ${{ secrets.CR_PAT }}
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'superkrustykrab'
+        publish-profile: ${{ secrets.KAFE_CONTAINER_AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: 'ghcr.io/kafekhalife/kafekhalife:latest'
