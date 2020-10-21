@@ -4,7 +4,7 @@ on:
   pull_request:
     branches: [ main ]
     
-env:
+env: 
   AZURE_WEBAPP_NAME: kafekhalife   # set this to your application's name
   IMG_URL: ghcr.io/kafekhalife/kafekhalife # update with application image URL 
   IMG_VERSION: ${{ github.run_id }} #uses the Action's Run ID as the version
