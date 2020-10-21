@@ -7,7 +7,7 @@ on:
 env:
   AZURE_WEBAPP_NAME: kafekhalife   # set this to your application's name
   IMG_URL: ghcr.io/kafekhalife/kafekhalife # update with application image URL 
-  IMG_VERSION: ${{ github.run_id }} #uses the Action's Run ID as the version
+  IMG_VERSION: latest #uses the Action's Run ID as the version
   
 jobs:
   build-and-deploy:
