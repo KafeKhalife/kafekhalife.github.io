@@ -1,11 +1,13 @@
 on:
     push:
-      branches: [ master ]
+      branches: [ main ]
     pull_request:
-  env:
+     branches: [ main ]
+     
+env: 
     IMG_URL: ghcr.io/kafekhalife/kafekhalife
-  
-  jobs:
+
+jobs:
     build:
       runs-on: ubuntu-latest
       steps:
