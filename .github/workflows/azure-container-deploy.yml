@@ -22,12 +22,6 @@ jobs:
         username: skhalife
         password: ${{ secrets.CR_PAT }}
         
-    - uses: azure/login@v1
-      with:
-        creds: ${{ secrets.AZ_WEB_APP_CREDS }}
-
-    - run: |
-        az webapp list --query "[?state=='Running']"
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'kafekhalife'
