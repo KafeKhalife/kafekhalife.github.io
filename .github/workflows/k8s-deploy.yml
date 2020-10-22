@@ -1,0 +1,54 @@
+name: AKS Deployment Workflow
+
+# Controls when the action will run. 
+on:
+  push:
+    # Publish `v1.2.3` tags as releases.
+    tags:
+      - v*   
+  
+
+env: 
+    IMG_URL: 'ghcr.io/kafekhalife/kafekhalife' # Update with your image url
+    
+
+jobs:
+    build:
+      runs-on: ubuntu-latest
+      steps:
+      - uses: actions/checkout@master
+      
+      - uses: Azure/docker-login@v1
+        with:
+          login-server: ghcr.io
+          username: ${{ secrets.CR_USR }}
+          password: ${{ secrets.CR_PAT }}
+      
+      - name: Publish
+        run: |
+          echo IMAGE=$IMG_URL
+          docker build . -t $IMG_URL:latest
+          docker push $IMG_URL:latest
+        
+      # Set the target AKS cluster.
+      - uses: Azure/aks-set-context@v1
+        with:
+          creds: '${{ secrets.AZURE_K8S_CREDS }}'
+          cluster-name: '${{ secrets.CLUSTER_NAME }}'
+          resource-group: '${{ secrets.AZURE_RG }}'
+          
+      - uses: Azure/k8s-create-secret@v1
+        with:
+          container-registry-url: ghcr.io
+          container-registry-username: '${{ secrets.CR_USR }}'
+          container-registry-password: '${{ secrets.CR_PAT }}'
+          secret-name: ghcr-k8s-secret
+  
+      - uses: Azure/k8s-deploy@v1
+        with:
+          manifests: |
+            manifests/deployment.yml
+          images: |
+            $IMG_URL:latest
+          imagepullsecrets: |
+            ghcr-k8s-secret
