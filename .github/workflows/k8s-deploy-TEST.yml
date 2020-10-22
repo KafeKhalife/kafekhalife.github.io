@@ -10,7 +10,6 @@ on:
 
 env: 
     IMG_URL: ghcr.io/kafekhalife/kafekhalife
-    CLUSTER_NAME: sk-gh-talk
 
 jobs:
     build:
@@ -34,7 +33,7 @@ jobs:
       - uses: Azure/aks-set-context@v1
         with:
           creds: '${{ secrets.AZURE_K8S_CREDS }}'
-          cluster-name: $CLUSTER_NAME
+          cluster-name: '${{ secrets.CLUSTER_NAME }}'
           resource-group: '${{ secrets.AZURE_RG }}'
           
       - uses: Azure/k8s-create-secret@v1
