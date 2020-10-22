@@ -1,12 +1,8 @@
-<!--
-  Make sure to have done the following:
-  [] Check the CONTRIBUTING.md and followed the standards
-  [] Add unit-tests
--->
+<--Fil out below as appropriate-->
 
 **What this PR does / why we need it**:
 
-**Which issue(s) this PR fixes** (optional)
+**Which issue(s) this PR fixes**: _(optional)_
 Closes #
 
-**Special notes for your reviewer**:
+**Special notes for your reviewer**: _(optional)_
