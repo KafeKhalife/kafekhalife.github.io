@@ -7,6 +7,7 @@ on:
      
 env: 
     IMG_URL: ghcr.io/kafekhalife/kafekhalife
+    IMG_VERSION: ${{ github.ref }} 
 
 jobs:
     build:
@@ -22,8 +23,8 @@ jobs:
       
       - run: |
           echo IMAGE=$IMG_URL
-          docker build . -t $IMG_URL:${{ github.sha }}
-          docker push $IMG_URL:${{ github.sha }}
+          docker build . -t $IMG_URL:$IMG_VERSION
+          docker push $IMG_URL:$IMG_VERSION
         
       # Set the target AKS cluster.
       - uses: Azure/aks-set-context@v1
@@ -44,6 +45,6 @@ jobs:
           manifests: |
             manifests/deployment.yml
           images: |
-            $IMG_URL:${{ github.sha }}
+            $IMG_URL:$IMG_VERSION
           imagepullsecrets: |
             demo-k8s-secret
