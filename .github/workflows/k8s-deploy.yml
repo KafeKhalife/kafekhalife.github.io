@@ -22,7 +22,7 @@ jobs:
           password: ${{ secrets.CR_PAT }}
       
       - run: |
-          echo IMAGE=$IMG_URL:$IMG_VERSION
+          echo IMAGE='$IMG_URL:$IMG_VERSION'
           docker build . -t $IMG_URL:$IMG_VERSION
           docker push $IMG_URL:$IMG_VERSION
         
