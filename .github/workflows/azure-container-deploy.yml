@@ -18,16 +18,16 @@ jobs:
     - name: 'Checkout Github Action'
       uses: actions/checkout@master
 
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ghcr.io
+        username: ${{ secrets.CR_USR }}
+        password: ${{ secrets.CR_PAT }}
+
     - name: 'Build Test Image'
       run: |
         docker build . -t ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}
         docker push ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}
-
-    - uses: azure/docker-login@v1
-      with:
-        login-server: ghcr.io
-        username: skhalife
-        password: ${{ secrets.CR_PAT }}
         
     - uses: azure/webapps-deploy@v2
       with:
