@@ -22,5 +22,5 @@
 #### :mag: NOTE:  
 _For those that joined the live session or are watching the recording, there was a typo that caused the Azure WebApp Deployment to fail. 
 In the `azure_web_deploy.yml` workflow, I fixed the issue by updating the environment variable reference to be: `$${{ env.IMG_URL }}`. 
-Check out the latest commit to see the fix!_
+Check out [this commit](https://github.com/KafeKhalife/kafekhalife.github.io/commit/47bc12ad2fb4740065fc329d3d920849f1527c56) to see the fix!_
 
