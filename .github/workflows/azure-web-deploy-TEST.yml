@@ -1,0 +1,38 @@
+name: Azure WebApp Container Deploy - TEST
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+env:
+  AZURE_WEBAPP_NAME: AppWithContainer   # set this to your application's name
+  IMG_URL: ghcr.io/kafekhalife/UPDATE-IMAGE-NAME: # update with application image URL 
+  IMG_VERSION: ${{ github.run_id }} #uses the Action's Run ID as the version
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@master
+
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ghcr.io
+        username: $${{ secrets.CR_USR }}
+        password: ${{ secrets.CR_PAT }}
+    
+    - name: Docker Build & Push to GitHub Packages
+      run: |
+        docker build . -t $IMG_URL:$IMG_VERSION
+        docker push $IMG_URL:$IMG_VERSION
+
+
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: $AZURE_WEBAPP_NAME
+        publish-profile: ${{ secrets.KAFE_AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: $IMG_URL:$IMG_VERSION
