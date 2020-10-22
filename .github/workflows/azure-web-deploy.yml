@@ -33,5 +33,5 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'kafekhalife-test'
-        publish-profile: ${{ secrets.KAFE_AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: '$ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}'
+        publish-profile: '${{ secrets.KAFE_AZURE_WEBAPP_PUBLISH_PROFILE }}'
+        images: 'ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}'
