@@ -4,7 +4,7 @@
 
 ![img](https://github.com/KafeKhalife/kafekhalife.github.io/blob/main/demo/TitlePage.png)   
 
-:sparkles: Thank you all who attended our GitHub Talk on Containerized Deployments for enterprises with GitHub Actions & Packages! :sparkles:
+:sparkles: Thank you all who attended our GitHub Talk on Containerized Deployments for enterprises with Actions & Packages! :sparkles:
 
 
 ##    
