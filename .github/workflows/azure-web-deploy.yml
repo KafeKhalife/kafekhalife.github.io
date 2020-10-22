@@ -9,7 +9,7 @@ on:
     branches: [ main ]
     
 env:
-  AZURE_WEBAPP_NAME: kafekhalife-test   # set this to your application's name
+  AZURE_WEBAPP_NAME: kafekhalife-tesr  # set this to your application's name
   IMG_URL: ghcr.io/kafekhalife/kafekhalife-test # update with application image URL 
   
 jobs:
