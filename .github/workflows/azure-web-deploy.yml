@@ -1,0 +1,41 @@
+name: Azure WebApp Container Deploy
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the default branch
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+    
+env:
+  AZURE_WEBAPP_NAME: kafekhalife-test   # set this to your application's name
+  IMG_URL: ghcr.io/kafekhalife/kafekhalife-test # update with application image URL 
+  
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - name: 'Checkout Github Action'
+      uses: actions/checkout@master
+
+    # login to ghcr with action supplied by Azure
+    - uses: azure/docker-login@v1
+      with:
+        login-server: ghcr.io
+        username: $${{ secrets.CR_USR }}
+        password: ${{ secrets.CR_PAT }}
+    
+    - name: 'Docker build & push to GitHub Packages'
+      run: |
+        echo IMAGE_NAME=$IMG_URL:${{ github.sha }}
+        docker build . -t $IMG_URL:${{ github.sha }}
+        docker push $IMG_URL:${{ github.sha }}
+
+    # Leveraging action supplied by Azure 
+    - uses: azure/webapps-deploy@v2
+      with:
+        app-name: '$AZURE_WEBAPP_NAME'
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        images: '$IMG_URL:${{ github.sha }}'
