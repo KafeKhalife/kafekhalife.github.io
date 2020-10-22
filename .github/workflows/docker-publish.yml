@@ -5,6 +5,11 @@ on:
     # Publish `main` as Docker `latest` image.
     branches:
       - main
+        
+  # Run tests, if any, on PR to main branch.
+  pull_request:
+    branches: 
+      - main
 
 env:
   # TODO: Change variable to your image's name.
