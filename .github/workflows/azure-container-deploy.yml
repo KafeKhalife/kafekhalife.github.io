@@ -20,8 +20,8 @@ jobs:
 
     - name: 'Build Test Image'
       run: |
-        docker build . -t ghcr.io/kafekhalife/kafekhalife-test:{{ github.sha }}
-        docker push ghcr.io/kafekhalife/kafekhalife-test:{{ github.sha }}
+        docker build . -t ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}
+        docker push ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}
 
     - uses: azure/docker-login@v1
       with:
@@ -32,5 +32,5 @@ jobs:
     - uses: azure/webapps-deploy@v2
       with:
         app-name: 'kafekhalife'
-        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: 'ghcr.io/kafekhalife/kafekhalife-test:{{ github.sha }}'
+        publish-profile: ${{ secrets.DEVTEST_WEBAPP_PUBLISH_PROFILE }}
+        images: 'ghcr.io/kafekhalife/kafekhalife-test:${{ github.sha }}'
