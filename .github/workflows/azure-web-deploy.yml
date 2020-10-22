@@ -26,13 +26,13 @@ jobs:
     
     - name: 'Docker build & push to GitHub Packages'
       run: |
-        echo IMAGE_NAME=$IMG_URL:${{ github.sha }}
-        docker build . -t $IMG_URL:${{ github.sha }}
-        docker push $IMG_URL:${{ github.sha }}
+        echo IMAGE_NAME=${{ env.IMG_URL }}:${{ github.sha }}
+        docker build . -t ${{ env.IMG_URL }}:${{ github.sha }}
+        docker push ${{ env.IMG_URL }}:${{ github.sha }}
 
     # Leveraging action supplied by Azure 
     - uses: azure/webapps-deploy@v2
       with:
         app-name: kafekhalife-test
         publish-profile: ${{ secrets.KAFE_AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: ${{ github.env.IMG_URL }}:${{ github.sha }}
+        images: ${{ env.IMG_URL }}:${{ github.sha }}
