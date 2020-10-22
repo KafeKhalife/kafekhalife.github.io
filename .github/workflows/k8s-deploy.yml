@@ -44,6 +44,6 @@ jobs:
           manifests: |
             manifests/deployment.yml
           images: |
-            IMG_URL:${{ github.sha }}
+            $IMG_URL:${{ github.sha }}
           imagepullsecrets: |
             demo-k8s-secret
