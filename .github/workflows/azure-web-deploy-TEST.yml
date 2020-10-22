@@ -7,9 +7,8 @@ on:
     branches: [ main ]
     
 env:
-  AZURE_WEBAPP_NAME: AppWithContainer   # set this to your application's name
-  IMG_URL: ghcr.io/kafekhalife/UPDATE-IMAGE-NAME: # update with application image URL 
-  IMG_VERSION: ${{ github.run_id }} #uses the Action's Run ID as the version
+  AZURE_WEBAPP_NAME: kafekhalife-test   # set this to your application's name
+  IMG_URL: ghcr.io/kafekhalife/kafekhalife-test  # update with application image URL 
   
 jobs:
   build-and-deploy:
@@ -27,12 +26,12 @@ jobs:
     
     - name: Docker Build & Push to GitHub Packages
       run: |
-        docker build . -t $IMG_URL:$IMG_VERSION
-        docker push $IMG_URL:$IMG_VERSION
+        docker build . -t $IMG_URL:${{ github.sha }}
+        docker push $IMG_URL:$${{ github.sha }}
 
 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: $AZURE_WEBAPP_NAME
+        app-name: '$AZURE_WEBAPP_NAME'
         publish-profile: ${{ secrets.KAFE_AZURE_WEBAPP_PUBLISH_PROFILE }}
-        images: $IMG_URL:$IMG_VERSION
+        images: '$IMG_URL:${{ github.sha }}
