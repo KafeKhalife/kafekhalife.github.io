@@ -1,7 +1,7 @@
 name: Azure WebApp Container Deploy
 
 # Controls when the action will run. Triggers the workflow on push or pull request
-# events but only for the default branch
+# events but only for the default branch 
 on:
   pull_request:
     branches: [ main ]
@@ -34,6 +34,6 @@ jobs:
     # Leveraging action supplied by Azure 
     - uses: azure/webapps-deploy@v2
       with:
-        app-name: kafekhalife-test
+        app-name: '$AZURE_WEBAPP_NAME'
         publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
         images: '$IMG_URL:${{ github.sha }}'
