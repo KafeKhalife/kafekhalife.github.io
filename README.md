@@ -1,6 +1,8 @@
 # Welcome to Kafe Khalife :coffee:
 ### The perfect place to pick up some coffee, containers, and kubernetes! 
 
+![img](https://github.com/KafeKhalife/kafekhalife.github.io/blob/main/demo/TitlePage.png)
+
 Thank you all who attended our GitHub Talk on Containerized Deployments for enterprises with GitHub Actions & Packages! 
 
 Here are links to find some of the resources mentioned during the session:
