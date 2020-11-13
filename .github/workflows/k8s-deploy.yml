@@ -47,6 +47,6 @@ jobs:
           manifests: |
             manifests/deployment.yml
           images: |
-            $IMG_URL:latest
+            ${{ env.IMG_URL }}:latest
           imagepullsecrets: |
             ghcr-k8s-secret
