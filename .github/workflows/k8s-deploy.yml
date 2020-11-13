@@ -7,11 +7,9 @@ on:
     tags:
       - v*   
   
-
 env: 
     IMG_URL: 'ghcr.io/kafekhalife/kafekhalife' # Update with your image url
     
-
 jobs:
     build:
       runs-on: ubuntu-latest
@@ -26,9 +24,9 @@ jobs:
       
       - name: Publish
         run: |
-          echo IMAGE=$IMG_URL
-          docker build . -t $IMG_URL:latest
-          docker push $IMG_URL:latest
+          echo IMAGE=${{ env.IMG_URL }}
+          docker build . -t ${{ env.IMG_URL }}:latest
+          docker push ${{ env.IMG_URL }}:latest
         
       # Set the target AKS cluster.
       - uses: Azure/aks-set-context@v1
